@@ -2,7 +2,6 @@ package berlinClock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,11 +36,15 @@ public class BerlinClockImpl implements TimeConverter {
 	 * @return A string representing a single row of the clock.
 	 */
 	private String createBerlinClockRowString(int illuminatedLights, int totalLightsInRow, String lampType) {
-
 		int unlitLights = totalLightsInRow - illuminatedLights;
-		String illuminatedLight = String.join("", Collections.nCopies(illuminatedLights, lampType));
-		String unlit = String.join("", Collections.nCopies(unlitLights, "0"));
-
-		return illuminatedLight + unlit;
+		StringBuilder totalCount = new StringBuilder();
+		
+		for (int i = 0; i < illuminatedLights; i++) {
+			totalCount.append(lampType);
+		}
+		for (int i = 0; i < unlitLights; i++) {
+			totalCount.append("0");
+		}
+		return totalCount.toString();
 	}
 }
